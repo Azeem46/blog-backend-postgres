@@ -3,17 +3,26 @@ const pool = require("../services/db");
 const { v4: uuidv4 } = require("uuid");
 const queries = require("../queries/postQueries");
 
-const getPostsByCreator = async (req, res) => {
-  const { title } = req.body;
-  console.log(req.body);
+// const getPostsByCreator = async (req, res) => {
+//   const { id } = req.params;
+//   const posts = req.body;
+//   console.log(req.body);
+//   console.log(req.params);
+//   try {
+//     // Adjusted query to fetch posts where the creator is the same as userId
+//     const result = await pool.query(queries.getPostsByCreator, [id]);
 
-  try {
-    const result = await pool.query(queries.getPostsByCreator, [title]);
-    res.json({ data: result.rows });
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
+//     if (result.rows.length === 0) {
+//       return res.status(404).json({ message: "No posts found for this user" });
+//     }
+
+//     res.json({ data: result.rows });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ message: "Something went wrong", error: error.message });
+//   }
+// };
 
 const getPost = async (req, res) => {
   const { id } = req.params;
@@ -76,20 +85,25 @@ const updatePost = async (req, res) => {
   const { id } = req.params;
   const { title, message, selectedFile, tags } = req.body;
 
+  // Fetch the current post data
   const result = await pool.query(queries.post, [id]);
 
   if (result.rows.length === 0) {
     return res.status(404).send(`No post with id: ${id}`);
   }
 
+  const existingPost = result.rows[0];
+
+  // Use existing values if they are not provided in the request body
   const updatedPost = {
-    title,
-    message,
-    tags,
-    selected_file: selectedFile,
+    title: title || existingPost.title,
+    message: message || existingPost.message,
+    tags: tags || existingPost.tags,
+    selected_file: selectedFile || existingPost.selected_file,
     id,
   };
 
+  // Update the post with the new values
   await pool.query(queries.updatePost, [
     updatedPost.title,
     updatedPost.message,
@@ -194,7 +208,7 @@ const getLatestPosts = async (req, res) => {
 };
 
 module.exports = {
-  getPostsByCreator,
+  // getPostsByCreator,
   createPost,
   getPost,
   updatePost,

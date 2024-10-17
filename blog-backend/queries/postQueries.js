@@ -1,5 +1,6 @@
 const getPostsByCreator = `
-    SELECT * FROM posts WHERE title = $1;
+SELECT * FROM posts WHERE name = $1;
+
 `;
 
 const getPost = `
