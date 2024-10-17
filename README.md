@@ -159,7 +159,12 @@ npm start
 
 The project uses environment variables to manage sensitive information and configurations. The following variables should be defined in a .env file:
 
--**PORT**: The port on which the server will run (default: 5000). -**DB_HOST:** Hostname of your PostgreSQL server. -**DB_USER:** Username for PostgreSQL. -**DB_PASSW**ORD: Password for PostgreSQL. -**DB_NAME:** Name of the PostgreSQL database. -**JWT_SECRET:** Secret key for signing JWT tokens.
+- **PORT**: The port on which the server will run (default: 5000).
+- **DB_HOST:** Hostname of your PostgreSQL server.
+- **DB_USER:** Username for PostgreSQL.
+- **DB_PASSW**ORD: Password for PostgreSQL.
+- **DB_NAME:** Name of the PostgreSQL database.
+- **JWT_SECRET:** Secret key for signing JWT tokens.
 
 ## API Documentation
 
