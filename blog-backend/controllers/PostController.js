@@ -3,30 +3,25 @@ const pool = require("../services/db");
 const { v4: uuidv4 } = require("uuid");
 const queries = require("../queries/postQueries");
 
-// const getPostsByCreator = async (req, res) => {
-//   const { id } = req.params;
-//   const posts = req.body;
-//   console.log(req.body);
-//   console.log(req.params);
-//   try {
-//     // Adjusted query to fetch posts where the creator is the same as userId
-//     const result = await pool.query(queries.getPostsByCreator, [id]);
-
-//     if (result.rows.length === 0) {
-//       return res.status(404).json({ message: "No posts found for this user" });
-//     }
-
-//     res.json({ data: result.rows });
-//   } catch (error) {
-//     res
-//       .status(500)
-//       .json({ message: "Something went wrong", error: error.message });
-//   }
-// };
+const getPostsByCreator = async (req, res) => {
+  const { creator } = req.params;
+  try {
+    const result = await pool.query(queries.getPostsByCreator, [creator]);
+    if (result.rows.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No posts found for this creator" });
+    }
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 const getPost = async (req, res) => {
   const { id } = req.params;
-
+  console.log(req.params);
   try {
     const result = await pool.query(queries.getPost, [id]);
 
@@ -208,7 +203,7 @@ const getLatestPosts = async (req, res) => {
 };
 
 module.exports = {
-  // getPostsByCreator,
+  getPostsByCreator,
   createPost,
   getPost,
   updatePost,

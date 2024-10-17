@@ -1,6 +1,19 @@
 const getPostsByCreator = `
-SELECT * FROM posts WHERE name = $1;
-
+ SELECT 
+      posts.id, 
+      posts.title, 
+      posts.message, 
+      posts.tags, 
+      posts.selected_file, 
+      posts.likes, 
+      posts.created_at, 
+      posts.views, 
+      posts.creator_name, 
+      users.name AS creator_name, 
+      users.email AS creator_email
+    FROM posts
+    JOIN users ON posts.creator = users.id
+    WHERE users.id = $1;
 `;
 
 const getPost = `
@@ -36,7 +49,7 @@ UPDATE users SET post_count = post_count - 1 WHERE id = $1;
 `;
 
 const deleteBookmark = `
-DELETE FROM bookmarks WHERE post = $1;
+DELETE FROM bookmarks WHERE post_id = $1;
 `;
 
 const deleteComment = `

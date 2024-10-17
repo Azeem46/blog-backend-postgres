@@ -1,7 +1,7 @@
 const express = require("express");
 
 const {
-  // getPostsByCreator,
+  getPostsByCreator,
   getPost,
   createPost,
   updatePost,
@@ -15,7 +15,7 @@ const router = express.Router();
 const auth = require("../middleware/auth.js");
 
 router.get("/latest", auth, getLatestPosts);
-// router.get("/creator/:id", getPostsByCreator);
+router.get("/creator/:creator", getPostsByCreator);
 router.get("/:id", getPost);
 router.patch("/:id/view", incrementViews);
 
