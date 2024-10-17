@@ -29,8 +29,6 @@ This repository contains the backend implementation for a blog application built
 - **dotenv**: For environment variable management.
 - **ESLint & Prettier**: Code quality and formatting tools.
 
----
-
 ## Features
 
 - **User Management**: Register, login, and manage users.
