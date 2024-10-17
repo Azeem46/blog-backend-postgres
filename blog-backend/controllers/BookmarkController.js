@@ -1,4 +1,5 @@
 const pool = require("../services/db"); // Make sure to configure your PostgreSQL pool connection
+const queries = require("../queries/bookmarkQueries");
 
 // Create a new bookmark
 const createBookmark = async (req, res) => {
@@ -7,28 +8,25 @@ const createBookmark = async (req, res) => {
 
   try {
     // Check if the post exists
-    const postResult = await pool.query("SELECT * FROM posts WHERE id = $1", [
-      postId,
-    ]);
+    const postResult = await pool.query(queries.post, [postId]);
     if (postResult.rowCount === 0) {
       return res.status(404).json({ message: "Post not found" });
     }
 
     // Check if the bookmark already exists
-    const bookmarkResult = await pool.query(
-      "SELECT * FROM bookmarks WHERE user_id = $1 AND post_id = $2",
-      [userId, postId]
-    );
+    const bookmarkResult = await pool.query(queries.checkexistingBookmark, [
+      userId,
+      postId,
+    ]);
     if (bookmarkResult.rowCount > 0) {
       return res.status(400).json({ message: "Post already bookmarked" });
     }
 
     // Insert new bookmark
-    const newBookmark = await pool.query(
-      `INSERT INTO bookmarks (user_id, post_id) 
-       VALUES ($1, $2) RETURNING *`,
-      [userId, postId]
-    );
+    const newBookmark = await pool.query(queries.createBookmark, [
+      userId,
+      postId,
+    ]);
 
     res.status(201).json(newBookmark.rows[0]); // Return the newly created bookmark
   } catch (error) {
@@ -44,13 +42,7 @@ const getBookmarks = async (req, res) => {
 
   try {
     // Retrieve bookmarks and related post details
-    const bookmarks = await pool.query(
-      `SELECT b.id, b.post_id, p.title, p.message, p.selected_file 
-       FROM bookmarks b
-       JOIN posts p ON p.id = b.post_id 
-       WHERE b.user_id = $1`,
-      [userId]
-    );
+    const bookmarks = await pool.query(queries.getBookmark, [userId]);
 
     res.status(200).json(bookmarks.rows); // Return the bookmarks with post details
   } catch (error) {
@@ -66,10 +58,7 @@ const removeBookmark = async (req, res) => {
 
   try {
     // Find the bookmark by its ID
-    const bookmarkResult = await pool.query(
-      "SELECT * FROM bookmarks WHERE id = $1",
-      [id]
-    );
+    const bookmarkResult = await pool.query(queries.bookmark, [id]);
 
     if (bookmarkResult.rowCount === 0) {
       return res.status(404).json({ message: "Bookmark not found" });
@@ -81,7 +70,7 @@ const removeBookmark = async (req, res) => {
     }
 
     // Delete the bookmark
-    await pool.query("DELETE FROM bookmarks WHERE id = $1", [id]);
+    await pool.query(queries.removeBookmark, [id]);
 
     res.status(200).json({ message: "Bookmark removed" });
   } catch (error) {
