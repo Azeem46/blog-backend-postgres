@@ -4,8 +4,6 @@
 
 This repository contains the backend implementation for a blog application built using **Node.js**, **Express.js**, and **PostgreSQL**. The application allows users to create posts, comment on them, bookmark posts, and manage users. It follows a RESTful API architecture with a well-structured folder hierarchy, ensuring clean and maintainable code.
 
----
-
 ## Table of Contents
 
 1. [Technologies Used](#technologies-used)
@@ -19,8 +17,6 @@ This repository contains the backend implementation for a blog application built
 9. [Testing](#testing)
 10. [Contributing](#contributing)
 11. [License](#license)
-
----
 
 ## Technologies Used
 
