@@ -141,7 +141,6 @@ touch .env
 7. Add the following environment variables to .env:
 
 ```makefile
-Copy code
 PORT=5000
 DB_HOST=localhost
 DB_USER=your_postgres_user
