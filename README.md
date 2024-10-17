@@ -84,7 +84,7 @@ blog-backend/
 
 The database is managed using PostgreSQL. The migration file 001_create_tables.sql creates the required tables.
 
-Key Tables
+### Key Tables
 
 - **Users**: Stores user details.
 - **Posts**: Stores blog posts with references to the users who created them.
