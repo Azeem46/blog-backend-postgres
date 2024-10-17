@@ -40,8 +40,6 @@ This repository contains the backend implementation for a blog application built
 - **Authentication & Authorization**: JWT-based authentication, including role-based access.
 - **Database Integration**: PostgreSQL with raw SQL queries for database operations.
 
----
-
 ## Project Structure
 
 ```bash
@@ -95,8 +93,6 @@ Key Tables
 - **Comments**: Stores comments linked to posts.
 - **Bookmarks**: Stores bookmarked posts for each user.
 - You can find the SQL schema under migrations/001_create_tables.sql.
-
----
 
 ## Installation
 
@@ -162,19 +158,13 @@ JWT_SECRET=your_jwt_secret_key
 npm start
 ```
 
----
-
 ## Environment Variables
 
 The project uses environment variables to manage sensitive information and configurations. The following variables should be defined in a .env file:
 
 -**PORT**: The port on which the server will run (default: 5000). -**DB_HOST:** Hostname of your PostgreSQL server. -**DB_USER:** Username for PostgreSQL. -**DB_PASSW**ORD: Password for PostgreSQL. -**DB_NAME:** Name of the PostgreSQL database. -**JWT_SECRET:** Secret key for signing JWT tokens.
 
----
-
 ## API Documentation
-
----
 
 ## Error Handling
 
@@ -188,8 +178,6 @@ Testing is implemented using Jest for unit and integration tests. To run the tes
 npm test
 ```
 
----
-
 ## Contributing
 
 Contributions are welcome! Please follow the guidelines below:
@@ -199,8 +187,6 @@ Contributions are welcome! Please follow the guidelines below:
 3. Commit your changes (git commit -m 'Add new feature').
 4. Push to the branch (git push origin feature-name).
 5. Create a Pull Request.
-
----
 
 ## License
 
