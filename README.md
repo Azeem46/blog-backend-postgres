@@ -172,7 +172,7 @@ The project uses environment variables to manage sensitive information and confi
 
 The project includes global error handling middleware in Express. All errors are logged, and appropriate HTTP status codes are returned to the client with detailed error messages when necessary.
 
-##Testing
+## Testing
 
 Testing is implemented using Jest for unit and integration tests. To run the tests:
 
