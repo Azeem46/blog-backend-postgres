@@ -170,6 +170,307 @@ The project uses environment variables to manage sensitive information and confi
 
 ## API Documentation
 
+## Authentication
+
+### Register
+
+**Endpoint:** `POST /user/signup`
+
+**Request Body:**
+
+```json
+{
+  "name": "JhonDoe",
+  "email": "jhondoe@gmail.com",
+  "password": "Password1!"
+}
+```
+
+**Response:**
+
+```json
+{
+  "user": {
+    "id": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+    "email": "jhondoe@gmail.com",
+    "password": "$2a$12$/oCRu/AC/Ay.ybiUXPwMEOM4R1574jwQu2nTbpniCy7O15AMRGMhG",
+    "name": "JhonDoe",
+    "join_date": "2024-10-18T12:16:17.337Z",
+    "post_count": 0
+  }
+}
+```
+
+### LOGIN
+
+**After you get token copy go to authorization header select bearer token and paste under that**
+
+**Endpoint:** `POST /user/signin`
+
+**Request Body:**
+
+```json
+{
+  "email": "jhondoe@gmail.com",
+  "password": "Password1!"
+}
+```
+
+**Response:**
+
+```json
+{
+  "message": "User signed in successfully",
+  "user": {
+    "email": "jhondoe@gmail.com",
+    "id": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+    "name": "JhonDoe",
+    "joinDate": "2024-10-18T12:16:17.337Z",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impob25kb2VAZ21haWwuY29tIiwiaWQiOiJhMmJlMGU2Zi1jZmQxLTQ2YmYtYWE2OC1iYTI3NjIwYmMyM2YiLCJpYXQiOjE3MjkyNTM5MzcsImV4cCI6MTc2MDgxMTUzN30.4TI4j3amxA7oyU0FvzW-phWn_xvcom5049XahUwnFcE"
+  }
+}
+```
+
+## POSTS
+
+### CREATE A POST
+
+**Endpoint:** `POST /posts`
+
+**Request Body:**
+
+```json
+{
+  "title": "Dragon ball Z",
+  "message": "One of the best anime of all time",
+  "selectedFile": "https://img.png.com",
+  "tags": ["anime", "dragon ball"]
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": 17,
+  "title": "Dragon ball Z",
+  "message": "One of the best anime of all time",
+  "name": "JhonDoe",
+  "tags": ["anime", "dragon ball"],
+  "selected_file": "https://img.png.com",
+  "likes": null,
+  "created_at": "2024-10-18T12:25:57.297Z",
+  "creator": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+  "views": 0,
+  "creator_name": "JhonDoe",
+  "uuid_id": "2fcf82ac-9349-4f06-8345-0de7b3fabf38"
+}
+```
+
+### Update the Post
+
+**Endpoint:** `POST /posts/:id`
+
+**Request Body:**
+
+```json
+{
+  "title": "Dragon ball Super",
+  "message": "One of the best anime of all time, one of the best animations",
+  "selectedFile": "https://img.png.com",
+  "tags": ["anime", "dragon ball", "goku"]
+}
+```
+
+**Response:**
+
+```json
+{
+  "title": "Dragon ball Super",
+  "message": "One of the best anime of all time, one of the best animations",
+  "tags": ["anime", "dragon ball", "goku"],
+  "selected_file": "https://img.png.com",
+  "id": "17"
+}
+```
+
+### GET POST BY ID
+
+**Endpoint:** `GET /posts/:id`
+
+**Response:**
+
+```json
+{
+  "id": 17,
+  "title": "Dragon ball Super",
+  "message": "One of the best anime of all time, one of the best animations",
+  "name": "JhonDoe",
+  "tags": ["anime", "dragon ball", "goku"],
+  "selected_file": "https://img.png.com",
+  "likes": null,
+  "created_at": "2024-10-18T12:25:57.297Z",
+  "creator": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+  "views": 0,
+  "creator_name": "JhonDoe",
+  "uuid_id": "2fcf82ac-9349-4f06-8345-0de7b3fabf38"
+}
+```
+
+### GET POSTS BY CREATOR
+
+**Endpoint:** `GET /posts/creator/:creator`
+
+**Response:**
+
+```json
+[
+  {
+    "id": 17,
+    "title": "Dragon ball Super",
+    "message": "One of the best anime of all time, one of the best animations",
+    "tags": ["anime", "dragon ball", "goku"],
+    "selected_file": "https://img.png.com",
+    "likes": null,
+    "created_at": "2024-10-18T12:25:57.297Z",
+    "views": 0,
+    "creator_name": "JhonDoe",
+    "creator_email": "jhondoe@gmail.com"
+  }
+]
+```
+
+### GET LATEST POSTS
+
+**If you create multiple post then you will get to see how it actuall looks below is how it looks after multiple post created it sort by latest post created**
+
+**Endpoint:** `GET /posts/latest`
+
+**Response:**
+
+```json
+[
+  {
+    "id": 17,
+    "title": "Dragon ball Super",
+    "message": "One of the best anime of all time, one of the best animations",
+    "name": "JhonDoe",
+    "tags": ["anime", "dragon ball", "goku"],
+    "selected_file": "https://img.png.com",
+    "likes": null,
+    "created_at": "2024-10-18T12:25:57.297Z",
+    "creator": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+    "views": 0,
+    "creator_name": "JhonDoe",
+    "uuid_id": "2fcf82ac-9349-4f06-8345-0de7b3fabf38"
+  },
+  {
+    "id": 16,
+    "title": "DRAGON BALL SPARKING ZERO",
+    "message": "Best Dragon ball game at the moment",
+    "name": "Jhon",
+    "tags": ["Dragon ball", "Sparking Zero", "Game"],
+    "selected_file": "https://img.png.com",
+    "likes": ["c5726f65-ef16-4887-a429-fafcd5495fb0"],
+    "created_at": "2024-10-17T09:40:12.170Z",
+    "creator": "c5726f65-ef16-4887-a429-fafcd5495fb0",
+    "views": 10,
+    "creator_name": "Jhon",
+    "uuid_id": "4d87b7d6-356e-47b6-b75d-9e3812a6e19a"
+  },
+  {
+    "id": 15,
+    "title": "Your Post Title",
+    "message": "This is the content of your post.",
+    "name": "Jhon",
+    "tags": ["example", "post", "tags"],
+    "selected_file": null,
+    "likes": null,
+    "created_at": "2024-10-16T12:48:10.562Z",
+    "creator": "c5726f65-ef16-4887-a429-fafcd5495fb0",
+    "views": 0,
+    "creator_name": "Jhon",
+    "uuid_id": "8d125ccd-04ff-4baa-a256-c63a88b900ff"
+  },
+  {
+    "id": 14,
+    "title": "Your Post Title",
+    "message": "This is the content of your post.",
+    "name": "Jhon",
+    "tags": ["example", "post", "tags"],
+    "selected_file": null,
+    "likes": null,
+    "created_at": "2024-10-16T12:36:25.389Z",
+    "creator": "c5726f65-ef16-4887-a429-fafcd5495fb0",
+    "views": 0,
+    "creator_name": "Jhon",
+    "uuid_id": "2e37ce89-475c-441e-a274-25fa8950dabc"
+  }
+]
+```
+
+### LIKE THE POST
+
+**After liking the post send get req to getpostbyid and see the result**
+
+**Endpoint:** `GET /posts/:id/likePost`
+
+**Response:**
+
+```json
+{
+  "likes": ["a2be0e6f-cfd1-46bf-aa68-ba27620bc23f"]
+}
+```
+
+**After you get the post by id**
+
+```json
+{
+    "id": 17,
+    "title": "Dragon ball Super",
+    "message": "One of the best anime of all time, one of the best animations",
+    "name": "JhonDoe",
+    "tags": [
+        "anime",
+        "dragon ball",
+        "goku"
+    ],
+    "selected_file": "https://img.png.com",
+    "likes": [
+        "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f" ---likes added
+    ],
+    "created_at": "2024-10-18T12:25:57.297Z",
+    "creator": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+    "views": 0,
+    "creator_name": "JhonDoe",
+    "uuid_id": "2fcf82ac-9349-4f06-8345-0de7b3fabf38"
+}
+```
+
+### Increment view of Post
+
+**Endpoint:** `GET /posts/:id/likePost`
+
+**Response:**
+
+```json
+{
+  "id": 17,
+  "title": "Dragon ball Super",
+  "message": "One of the best anime of all time, one of the best animations",
+  "name": "JhonDoe",
+  "tags": ["anime", "dragon ball", "goku"],
+  "selected_file": "https://img.png.com",
+  "likes": ["a2be0e6f-cfd1-46bf-aa68-ba27620bc23f"],
+  "created_at": "2024-10-18T12:25:57.297Z",
+  "creator": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+  "views": 10,
+  "creator_name": "JhonDoe",
+  "uuid_id": "2fcf82ac-9349-4f06-8345-0de7b3fabf38"
+}
+```
+
 ## Error Handling
 
 The project includes global error handling middleware in Express. All errors are logged, and appropriate HTTP status codes are returned to the client with detailed error messages when necessary.
