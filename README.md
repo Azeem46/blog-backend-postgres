@@ -413,7 +413,7 @@ The project uses environment variables to manage sensitive information and confi
 
 ### LIKE THE POST
 
-**After liking the post send get req to getpostbyid and see the result**
+**After liking the post send get request to [GET POST BY ID](#getpostbyid) and see the result**
 
 **Endpoint:** `GET /posts/:id/likePost`
 
