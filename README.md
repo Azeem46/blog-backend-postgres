@@ -471,6 +471,139 @@ The project uses environment variables to manage sensitive information and confi
 }
 ```
 
+## Bookmark
+
+### Create Bookmark
+
+**Endpoint:** `POST /bookmarks`
+
+**Request Body:**
+
+```json
+{
+  "userId": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+  "postId": "17"
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": 4,
+  "user_id": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+  "created_at": "2024-10-19T09:48:25.093Z",
+  "post_id": 17
+}
+```
+
+### GET Bookmarks
+
+**Endpoint:** `GET /bookmarks`
+
+**Response:**
+
+```json
+[
+  {
+    "id": 4,
+    "post_id": 17,
+    "title": "Dragon ball Super",
+    "message": "One of the best anime of all time, one of the best animations",
+    "selected_file": "https://img.png.com"
+  }
+]
+```
+
+### REMOVE Bookmarks
+
+**Endpoint:** `DELETE /bookmarks/:id`
+
+**Response**
+
+```json
+{
+  "message": "Bookmark removed"
+}
+```
+
+## Comment
+
+### Create A Comment
+
+**Endpoint:** `POST /comments`
+
+**Request Body:**
+
+```json
+{
+  "postId": "17",
+  "text": "This is nice post"
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": 14,
+  "postId": "17",
+  "userId": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+  "text": "This is a good post",
+  "createdAt": "2024-10-19T10:13:30.754Z"
+}
+```
+
+### Get Comments
+
+**Endpoint:** `GET /comments/:postId`
+
+**Response**
+
+```json
+{
+  "postId": "17",
+  "userId": "a2be0e6f-cfd1-46bf-aa68-ba27620bc23f",
+  "text": "This is nice post",
+  "createdAt": "2024-10-19T09:54:03.999Z"
+}
+```
+
+### UPDATE the comment
+
+**Endpoint:** `PATCH /comments/:id`
+
+**Request Body:**
+
+```json
+{
+  "postId": "17",
+  "text": "This is a very good post"
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "14",
+  "text": "This is a very good post",
+  "updatedAt": "2024-10-19T10:15:59.241Z"
+}
+```
+
+### DELETE the Comment
+
+**Endpoint:** `DELETE /comments/:id`
+
+**Response**
+
+```json
+{
+  "message": "Comment deleted successfully"
+}
+```
+
 ## Error Handling
 
 The project includes global error handling middleware in Express. All errors are logged, and appropriate HTTP status codes are returned to the client with detailed error messages when necessary.

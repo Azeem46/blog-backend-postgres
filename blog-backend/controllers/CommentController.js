@@ -13,9 +13,18 @@ const createComment = async (req, res) => {
 
     const createdAt = new Date().toISOString();
 
-    await pool.query(queires.createComment, [postId, userId, text, createdAt]);
+    // Modify the query to return the commentId after inserting the comment
+    const commentResult = await pool.query(queires.createComment, [
+      postId,
+      userId,
+      text,
+      createdAt,
+    ]);
 
-    res.status(201).json({ postId, userId, text, createdAt });
+    // Extract the commentId from the query result
+    const id = commentResult.rows[0].id;
+
+    res.status(201).json({ id, postId, userId, text, createdAt });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

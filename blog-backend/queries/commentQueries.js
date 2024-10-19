@@ -7,7 +7,9 @@ SELECT * FROM comments WHERE id = $1
 `;
 
 const createComment = `
-INSERT INTO comments (post_id, user_id, text, created_at) VALUES ($1, $2, $3, $4);
+INSERT INTO comments (post_id, user_id, text, created_at)
+VALUES ($1, $2, $3, $4)
+RETURNING id;
 `;
 
 const getCommentsByPost = `
