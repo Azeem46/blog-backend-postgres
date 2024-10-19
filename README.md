@@ -233,6 +233,8 @@ The project uses environment variables to manage sensitive information and confi
 
 ## POSTS
 
+\*\*Make sure to copy the token you recieve when logging and paste that under bearer token in authorization header otherwise you will not be able to make the request for POSTS
+
 ### CREATE A POST
 
 **Endpoint:** `POST /posts`
