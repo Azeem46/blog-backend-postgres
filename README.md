@@ -203,7 +203,7 @@ The project uses environment variables to manage sensitive information and confi
 
 ### LOGIN
 
-**After you get token copy go to authorization header select bearer token and paste under that**
+**After you login and get token, copy that token and go to authorization header select bearer token and paste under that**
 
 **Endpoint:** `POST /user/signin`
 
