@@ -4,7 +4,7 @@
 
 ## Overview
 
-This repository contains the backend implementation for a blog application built using **Node.js**, **Express.js**, and **PostgreSQL**. The application allows users to create posts, comment on them, bookmark posts, and manage users. It follows a RESTful API architecture with a well-structured folder hierarchy, ensuring clean and maintainable code.
+This repository contains the backend implementation for a blog application built using **Node.js**, **Express.js**, and **PostgreSQL**. The application allows users to create posts, comment on them, bookmark posts. It follows a RESTful API architecture with a well-structured folder hierarchy, ensuring clean and maintainable code.
 
 ## Table of Contents
 
@@ -33,11 +33,11 @@ This repository contains the backend implementation for a blog application built
 
 ## Features
 
-- **User Management**: Register, login, and manage users.
-- **Posts**: Create, update, delete, and view blog posts.
+- **User Management**: Register, login.
+- **Posts**: Create, update, delete, likePost and view blog posts.
 - **Comments**: Add, update, and delete comments on posts.
 - **Bookmarks**: Bookmark/unbookmark posts.
-- **Authentication & Authorization**: JWT-based authentication, including role-based access.
+- **Authentication & Authorization**: JWT-based authentication.
 - **Database Integration**: PostgreSQL with raw SQL queries for database operations.
 
 ## Project Structure
